@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<meta name="robots" content="noindex">
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Convert</title>
+</head>
+
+<body>
+	<input type="number" id="input">
+	m ->
+	<input id="output" disabled>
+	<select id="unit">
+		<option value="ft">foot</option>
+		<option value="y">Yard</option>
+	</select>
+	<script >
+		const CONVERTION_MATRIX = { ft: 0.3048, y: 0.9144 };
+
+		const input = document.body.querySelector("#input");
+		const output = document.body.querySelector("#output");
+		const unit = document.body.querySelector("#unit");
+
+		input.oninput = function (e) { convert(); }
+		unit.onchange = function (e) { convert(); }
+
+		function convert() {
+			const inputValue = input.value;
+			if (inputValue && !isNaN(inputValue)) {
+				const factor = CONVERTION_MATRIX[unit.value];
+				const outputValue = factor * inputValue;
+				output.value = outputValue;
+			} else {
+				output.value = "Error: not a number"
+			}
+		}
+
+	</script>
+</body>
+
+</html>
