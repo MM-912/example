@@ -5,18 +5,44 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
+	<!-- Fonts and CSS Reset -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
+
+	<!-- PrismJS: Syntax Highlighting -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.13.0/themes/prism.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.13.0/prism.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.13.0/plugins/normalize-whitespace/prism-normalize-whitespace.js"></script>
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/solid.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/fontawesome.css">
+
+	<!-- Mustard UI -->
+	<link rel="stylesheet" href="https://unpkg.com/mustard-ui@latest/dist/css/mustard-ui.min.css">
+	<link rel="stylesheet" href="css/style.css">
 	<title>Convert</title>
 </head>
 
 <body>
-	<input type="number" id="input">
-	m ->
-	<input id="output" disabled>
-	<select id="unit">
-		<option value="ft">foot</option>
-		<option value="y">Yard</option>
-	</select>
-	<script >
+	<div class="container-small">
+
+		<div class="row">
+			<div class="col col-sm-4"><input type="number" id="input"> </div>
+			<div class="col col-sm-1 align-center">m-></div>
+			<div class="col col-sm-4"><input type="number" id="output"></div>
+
+			<div class="col col-sm-3">
+				<select id="unit">
+					<option value="ft">foot</option>
+					<option value="y">Yard</option>
+				</select>
+			</div>
+		</div>
+
+	</div>
+	<script>
 		const CONVERTION_MATRIX = { ft: 0.3048, y: 0.9144 };
 
 		const input = document.body.querySelector("#input");
