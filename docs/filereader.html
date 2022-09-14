@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File reader</title>
+</head>
+
+<body>
+    <input type="file" id="fileSelector" accept=".json">
+    <div id="fileContent"></div>
+
+    <script>
+
+        const ENCODING = "utf-8";
+        const fileSelector = document.querySelector("#fileSelector");
+        const fileContent = document.querySelector("#fileContent")
+
+        fileSelector.addEventListener('change', onFileSelected);
+
+        async function onFileSelected(e) {
+            const fileContent = await loadFile(e.target.files[0]);
+            const text = decodeContent(fileContent,ENCODING);
+            display(fileContent,text);
+        }
+
+        async function loadFile(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.addEventListener('load', (event) => {
+                    resolve(event.target.result);
+                });
+                reader.onerror = reject;
+                reader.readAsArrayBuffer(file);
+            });
+        }
+
+        function decodeContent(content,encoding){
+            const decoder = new TextDecoder(encoding);
+            return decoder.decode(content);
+        }
+
+        function display(target,content) {
+            target.innerHTML = content;
+        }
+
+    </script>
+
+</body>
+
+</html>
